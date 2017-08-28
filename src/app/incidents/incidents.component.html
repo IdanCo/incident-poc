@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col">
+    <app-incident-list></app-incident-list>
+  </div>
+  <div class="col">
+    <app-incident-details
+        [incident]="selectedIncident"
+        *ngIf="selectedIncident; else infoText"
+    ></app-incident-details>
+    <ng-template #infoText>
+      <p>Please select an incident!</p>
+    </ng-template>
+  </div>
+</div>

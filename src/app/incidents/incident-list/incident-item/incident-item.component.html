@@ -1,0 +1,15 @@
+<div class="border p-2 mb-1" (click)="selectIncident()">
+  <div class="row">
+
+    <div class="col">
+      <h6>{{ incident.title }}</h6>
+    </div>
+
+    <div class="col">
+      <div class="text-right">
+        <app-snooze-button [incident]="incident"></app-snooze-button>
+      </div>
+    </div>
+
+  </div>
+</div>

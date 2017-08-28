@@ -1,0 +1,9 @@
+<a href="#" class="btn btn-primary"
+   [ngClass]="{ 'btn-danger': snoozeData.snoozed }"
+   [ngSwitch]="snoozeData.snoozed"
+   (click)="toggleStatus()"
+   appStopPropagation
+>
+    <span *ngSwitchCase="true">Unsnooze</span>
+    <span *ngSwitchDefault>Snooze</span>
+</a>
