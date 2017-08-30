@@ -9,6 +9,8 @@ import { IncidentItemComponent } from './incidents/incident-list/incident-item/i
 import { IncidentDetailsComponent } from './incidents/incident-details/incident-details.component';
 import { SnoozeButtonComponent } from './snooze/snooze-button/snooze-button.component';
 import { StopPropagationDirective } from './stop-propagation.directive';
+import { FoldersComponent } from './folders/folders.component';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -19,10 +21,12 @@ import { StopPropagationDirective } from './stop-propagation.directive';
     IncidentItemComponent,
     IncidentDetailsComponent,
     SnoozeButtonComponent,
-    StopPropagationDirective
+    StopPropagationDirective,
+    FoldersComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

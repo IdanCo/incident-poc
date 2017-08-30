@@ -1,5 +1,5 @@
-<a href="#" class="btn btn-primary"
-   [ngClass]="{ 'btn-danger': snoozeData.snoozed }"
+<a class="btn btn-success"
+   [ngClass]="{ 'btn-warning': snoozeData.snoozed }"
    [ngSwitch]="snoozeData.snoozed"
    (click)="toggleStatus()"
    appStopPropagation
