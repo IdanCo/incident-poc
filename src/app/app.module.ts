@@ -11,6 +11,7 @@ import { SnoozeButtonComponent } from './snooze/snooze-button/snooze-button.comp
 import { StopPropagationDirective } from './stop-propagation.directive';
 import { FoldersComponent } from './folders/folders.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {FakeBackendService} from "./fake-backend/fake-backend.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {AppRoutingModule} from "./app-routing.module";
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [FakeBackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

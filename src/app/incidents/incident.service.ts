@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Incident} from './incident.model';
+import {FakeBackendService} from "../fake-backend/fake-backend.service";
 
 @Injectable()
 export class IncidentService {
@@ -29,18 +30,26 @@ export class IncidentService {
     }
   ];
 
-  constructor() { }
+  constructor(private fakeBackendService: FakeBackendService ) { }
 
   getAllIncidents() {
     return this.incidents;
   }
 
+  getIncidentsFeed() {
+    return this.fakeBackendService.incidentFeed;
+  }
+
   getIncidentsByFolder(folderId) {
-    return this.incidents.filter(incident => incident.folder === folderId );
+    this.fakeBackendService.getIncidentsByFolder(folderId);
   }
 
   setSelectedIncident(incident: Incident) {
     this.incidentSelected.emit(incident);
+  }
+
+  updateIncident() {
+      this.incidents[0].title = 'wow';
   }
 
 }

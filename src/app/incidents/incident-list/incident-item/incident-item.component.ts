@@ -16,7 +16,8 @@ export class IncidentItemComponent implements OnInit {
   }
 
   selectIncident() {
-    this.incidentService.setSelectedIncident(this.incident);
+    // this.incidentService.setSelectedIncident(this.incident);
+    this.incidentService.updateIncident();
   }
 
 }

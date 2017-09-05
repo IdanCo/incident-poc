@@ -7,15 +7,21 @@ import {Incident} from '../incident.model';
   templateUrl: './incident-list.component.html',
   styleUrls: ['./incident-list.component.css']
 })
-export class IncidentListComponent implements OnChanges {
+export class IncidentListComponent implements OnChanges, OnInit {
   incidents: Incident[];
   @Input() folderId: string;
 
   constructor(private incidentService: IncidentService) { }
 
+  ngOnInit() {
+    this.incidentService.getIncidentsFeed()
+      .subscribe(incidents => this.incidents = incidents);
+    this.incidentService.getIncidentsByFolder(this.folderId);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     const currentFolder = changes.folderId.currentValue;
-    this.incidents = this.incidentService.getIncidentsByFolder(currentFolder);
+    this.incidentService.getIncidentsByFolder(currentFolder);
   }
 
 }
