@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Incident} from "../../incident.model";
-import {IncidentService} from "../../incident.service";
+import {Incident} from "../../../services/incident/incident.model";
+import {IncidentService} from "../../../services/incident/incident.service";
 
 @Component({
   selector: 'app-incident-item',
@@ -17,7 +17,7 @@ export class IncidentItemComponent implements OnInit {
 
   selectIncident() {
     // this.incidentService.setSelectedIncident(this.incident);
-    this.incidentService.updateIncident();
+    // this.incidentService.updateIncident();
   }
 
 }

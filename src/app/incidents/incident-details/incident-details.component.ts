@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Incident} from '../incident.model';
+import {Incident} from '../../services/incident/incident.model';
 
 @Component({
   selector: 'app-incident-details',

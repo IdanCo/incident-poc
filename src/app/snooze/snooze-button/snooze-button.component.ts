@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SnoozeService} from '../snooze.service';
-import {Incident} from '../../incidents/incident.model';
-import {SnoozeData} from '../snooze-data.model';
+import {SnoozeService} from '../../services/snooze/snooze.service';
+import {Incident} from '../../services/incident/incident.model';
+import {SnoozeData} from '../../services/snooze/snooze-data.model';
 
 @Component({
   selector: 'app-snooze-button',
@@ -15,12 +15,21 @@ export class SnoozeButtonComponent implements OnInit {
   constructor(private snoozeService: SnoozeService) { }
 
   ngOnInit() {
-    this.snoozeData = this.snoozeService.getSnoozeData(this.incident);
-    console.info(this.snoozeData);
+    this.getSnooze();
   }
 
   toggleStatus() {
     this.snoozeData.snoozed = !this.snoozeData.snoozed;
+  }
+
+  getSnooze() {
+    this.snoozeService.getSnoozeByIncident(this.incident)
+      .subscribe(
+        (snooze) => {
+          this.snoozeData = snooze;
+          console.info(this.snoozeData);
+        }
+      );
   }
 
 }

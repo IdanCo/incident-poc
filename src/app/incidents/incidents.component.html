@@ -1,17 +1,27 @@
 <div class="row">
-  <div class="col-2">
-    <app-folders></app-folders>
-  </div>
-  <div class="col">
-    <app-incident-list [folderId]="selectedFolder"></app-incident-list>
-  </div>
-  <div class="col">
-    <app-incident-details
-        [incident]="selectedIncident"
-        *ngIf="selectedIncident; else infoText"
-    ></app-incident-details>
-    <ng-template #infoText>
-      <p>Please select an incident!</p>
-    </ng-template>
-  </div>
+    <div class="col-2">
+        {{ incidents }}
+        <app-folders></app-folders>
+    </div>
+    <div class="col">
+        <app-incident-list [folderId]="selectedFolder" [incidents]="incidents"></app-incident-list>
+    </div>
+    <div class="col">
+        <div class="row">
+            <div class="col-12">
+                <app-incident-details
+                        [incident]="selectedIncident"
+                        *ngIf="selectedIncident; else infoText"
+                ></app-incident-details>
+                <ng-template #infoText>
+                    <p>Please select an incident!</p>
+                </ng-template>
+            </div>
+            <div class="col-12">
+                <app-fakend></app-fakend>
+            </div>
+        </div>
+
+
+    </div>
 </div>

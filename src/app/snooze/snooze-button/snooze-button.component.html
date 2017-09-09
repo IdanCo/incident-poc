@@ -1,4 +1,5 @@
 <a class="btn btn-success"
+   *ngIf="snoozeData"
    [ngClass]="{ 'btn-warning': snoozeData.snoozed }"
    [ngSwitch]="snoozeData.snoozed"
    (click)="toggleStatus()"

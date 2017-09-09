@@ -1,4 +1,4 @@
-import {Incident} from "../incidents/incident.model";
+import {Incident} from "../incident/incident.model";
 
 const incidents: Incident[] = [
     {
