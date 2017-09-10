@@ -2,7 +2,7 @@
    *ngIf="snoozeData"
    [ngClass]="{ 'btn-warning': snoozeData.snoozed }"
    [ngSwitch]="snoozeData.snoozed"
-   (click)="toggleStatus()"
+   (click)="toggleSnooze()"
    appStopPropagation
 >
     <span *ngSwitchCase="true">Unsnooze</span>

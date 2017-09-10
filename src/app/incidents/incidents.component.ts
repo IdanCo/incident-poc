@@ -65,10 +65,12 @@ export class IncidentsComponent implements OnInit {
     const oldIncidentIndex = this.incidents.findIndex(incident => incident.id === newIncident.id );
     const isIncidentValid = this.isIncidentValid(newIncident);
 
-    if (oldIncidentIndex !== -1) {
+    if (oldIncidentIndex !== -1 && isIncidentValid) {
       this.updateIncident(oldIncidentIndex, newIncident);
     } else if (isIncidentValid) {
       this.addNewIncident(newIncident);
+    } else if (oldIncidentIndex !== -1) {
+      this.removeIncident(oldIncidentIndex);
     }
   }
 
@@ -82,6 +84,10 @@ export class IncidentsComponent implements OnInit {
 
   updateIncident(oldIncidentIndex: number, newIncident: Incident) {
     this.incidents[oldIncidentIndex] = newIncident;
+  }
+
+  removeIncident(incidentIndex: number) {
+    this.incidents.splice(incidentIndex, 1);
   }
 
 }

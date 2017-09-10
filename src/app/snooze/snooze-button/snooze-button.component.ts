@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {SnoozeService} from '../../services/snooze/snooze.service';
 import {Incident} from '../../services/incident/incident.model';
 import {SnoozeData} from '../../services/snooze/snooze-data.model';
+import {IncidentService} from "../../services/incident/incident.service";
 
 @Component({
   selector: 'app-snooze-button',
@@ -12,14 +13,28 @@ export class SnoozeButtonComponent implements OnInit {
   @Input() incident: Incident;
   snoozeData: SnoozeData;
 
-  constructor(private snoozeService: SnoozeService) { }
+  constructor(private snoozeService: SnoozeService,
+              private incidentService: IncidentService) { }
 
   ngOnInit() {
     this.getSnooze();
   }
 
-  toggleStatus() {
-    this.snoozeData.snoozed = !this.snoozeData.snoozed;
+  toggleSnooze() {
+    const originalIncident:Incident = Object.assign({}, this.incident);
+
+    this.snoozeService.toggleSnooze(this.incident)
+      .subscribe(
+        (optimisticIncident) => {
+          this.incidentService.pushNewIncident(optimisticIncident);
+          console.info('pushed optimistic incident');
+        },
+        (error) => {
+          this.incidentService.pushNewIncident(originalIncident);
+          console.info('error', this.incident, originalIncident)
+        },
+        () => console.info('done')
+      );
   }
 
   getSnooze() {

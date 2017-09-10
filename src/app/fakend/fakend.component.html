@@ -1,3 +1,9 @@
 <hr class="mt-5">
 <h2>Fakend</h2>
 <button class="btn btn-secondary" (click)="pushNewIncident()">New Incident</button>
+<div class="form-check">
+    <label class="form-check-label">
+        <input type="checkbox" [checked]="errorMode" (change)="toggleErrorMode()" />
+        Error Mode
+    </label>
+</div>

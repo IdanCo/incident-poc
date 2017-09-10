@@ -6,16 +6,19 @@ import {Incident} from "../incident/incident.model";
 import {Observable} from "rxjs/Observable";
 import {SnoozeData} from "../snooze/snooze-data.model";
 
+const DELAY: number = 500;
+
 @Injectable()
 export class FakendService {
   private liveIncidentFeed = new Subject<Incident>();
   private newIncidentId = 1000;
+  errorMode: boolean = false;
 
   getIncidentsByFolder(folderId) {
     const incidents = new Subject<Incident[]>();
     setTimeout(() => {
       incidents.next(Incidents.filter(incident => incident.folder === folderId));
-    }, 1000);
+    }, DELAY);
     return incidents;
   }
 
@@ -27,8 +30,31 @@ export class FakendService {
     const snooze = new Subject<SnoozeData>();
     setTimeout(() => {
       snooze.next(Snoozes.find(snooze => snooze.incidentId === incident.id));
-    }, 1000);
+    }, DELAY);
     return snooze;
+  }
+
+  toggleSnooze(incident: Incident) {
+    const toggleSnooze = new Subject<Incident>();
+
+    const incidentIndex = Incidents.findIndex(x => x.id === incident.id );
+    const snoozeIndex = Snoozes.findIndex(x => x.incidentId === incident.id );
+
+    setTimeout(() => {
+      if (this.errorMode) {
+        console.info('backedn error');
+        toggleSnooze.error('something went wrong');
+      } else {
+        console.info('no no no backedn error');
+
+        Incidents[incidentIndex].folder = Incidents[incidentIndex].folder === 'active' ? 'snoozed' : 'active';
+        Snoozes[snoozeIndex].snoozed = !Snoozes[snoozeIndex].snoozed;
+        this.liveIncidentFeed.next(Incidents[incidentIndex]);
+        toggleSnooze.next(Incidents[incidentIndex]);
+      }
+    }, DELAY);
+
+    return toggleSnooze;
   }
 
   pushNewIncident() {
